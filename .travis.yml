@@ -1,6 +1,5 @@
 language: python
 rvm:
   - 3.8
-deploy:
-  - provider: script
-  - script: bash install.sh
+install:
+  - bash install.sh
