@@ -1,4 +1,17 @@
+conda --version
+if [[ $? -ne 0 ]]; then
+  wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
+  bash miniconda.sh -b -p $HOME/miniconda
+  source "$HOME/miniconda/etc/profile.d/conda.sh"
+  hash -r
+  conda config --set always_yes yes --set changeps1 no
+  conda update -q conda
+  # Useful for debugging any issues with conda
+  conda info -a
+fi
 conda config --add channels conda-forge
+conda create -q -n graph-database-environment python=3.8 pygraphblas pytest
+conda activate graph-database-environment
 conda install pygraphblas
-pip3 install pyformlang
-pip3 install pytest
+pip install pyformlang
+conda install pytest
