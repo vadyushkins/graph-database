@@ -13,5 +13,4 @@ conda config --add channels conda-forge
 conda create -q -n graph-database-environment python=3.8 pygraphblas pytest
 conda activate graph-database-environment
 conda install pygraphblas
-pip install pyformlang
-conda install pytest
+pip install -r requirements.txt
