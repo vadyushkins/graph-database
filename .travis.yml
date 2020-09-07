@@ -5,4 +5,5 @@ install:
   - bash install.sh
 
 script:
+  - conda activate graph-database-environment
   - pytest -v -s
