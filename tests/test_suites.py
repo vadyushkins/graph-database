@@ -5,13 +5,13 @@ def test_matrix_product():
     a = Matrix.from_lists(
         [0, 0, 1, 1],
         [0, 1, 0, 1],
-        [1, 1, 1, 1],
+        [1, 2, 3, 4],
         typ=INT64,
     )
     b = Matrix.from_lists(
         [0, 0, 1, 1],
         [0, 1, 0, 1],
-        [2, 2, 2, 2],
+        [5, 6, 7, 8],
         typ=INT64,
     )
 
@@ -19,7 +19,7 @@ def test_matrix_product():
     expected = Matrix.from_lists(
         [0, 0, 1, 1],
         [0, 1, 0, 1],
-        [4, 4, 4, 4],
+        [19, 22, 43, 50],
         typ=INT64
     )
 
