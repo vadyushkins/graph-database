@@ -4,6 +4,7 @@ if [[ $? -ne 0 ]]; then
   bash miniconda.sh -b -p $HOME/miniconda
   source "$HOME/miniconda/etc/profile.d/conda.sh"
   conda init
+  echo "export PATH=\"$HOME/miniconda/bin:$PATH\"" >> $HOME/.bashrc
   source "$HOME/.bashrc"
   hash -r
   conda config --set always_yes yes --set changeps1 yes

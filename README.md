@@ -7,6 +7,13 @@ Simple graph database on Python
 [![Build Status](https://travis-ci.com/viabzalov/graph-database.svg?branch=master)](https://travis-ci.com/viabzalov/graph-database)
 
 # Install
+
+This project uses miniconda to download and install packages, if you don't have it installed, the installation script will download and install it itself.
+
+To run the installation script, execute the command:
+
 ```bash
-bash install.sh
+./install.sh
 ```
+
+And, after that, restart the terminal.
