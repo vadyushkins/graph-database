@@ -14,7 +14,7 @@ def matrix_multiplication_suite(request):
     def fill(dst, src):
         for i in range(n):
             for j in range(n):
-                dst[i][j] = int(src[i][j])
+                dst[i, j] = int(src[i][j])
 
     a_pg = pg.Matrix.sparse(pg.INT64, n, n)
     fill(dst=a_pg, src=a)
