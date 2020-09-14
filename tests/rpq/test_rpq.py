@@ -45,7 +45,8 @@ def test_transitive_closure(suite):
     for label in g:
         actual += g[label]
 
-    actual = transitive_closure(actual)
+    tmp = transitive_closure(actual)
+    actual = tmp
 
     expected = LabeledGraph.from_txt(suite['closure'])['test_transitive_closure']
 
