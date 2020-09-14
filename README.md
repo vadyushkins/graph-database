@@ -20,6 +20,8 @@ And, after that, restart the terminal.
 
 # How to use
 
+Only non-empty graphs and non-empty queries are supported.
+
 ```bash
 usage: main.py [-h] --graph GRAPH --query QUERY [--sources SOURCES]
                [--destinations DESTINATIONS]
