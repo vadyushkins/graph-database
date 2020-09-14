@@ -1,25 +1,27 @@
-import pygraphblas as pg
+from pygraphblas import *
+
 
 def test_simple():
-    a = pg.Matrix.from_lists(
+    a = Matrix.from_lists(
         [0, 0, 1, 1],
         [0, 1, 0, 1],
         [1, 2, 3, 4],
-        typ=pg.INT64,
+        typ=INT64,
     )
-    b = pg.Matrix.from_lists(
+    b = Matrix.from_lists(
         [0, 0, 1, 1],
         [0, 1, 0, 1],
         [5, 6, 7, 8],
-        typ=pg.INT64,
+        typ=INT64,
     )
 
     actual = a @ b
-    expected = pg.Matrix.from_lists(
+
+    expected = Matrix.from_lists(
         [0, 0, 1, 1],
         [0, 1, 0, 1],
         [19, 22, 43, 50],
-        typ=pg.INT64
+        typ=INT64
     )
 
     assert expected.iseq(actual)

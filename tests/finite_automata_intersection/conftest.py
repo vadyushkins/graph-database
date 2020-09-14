@@ -1,5 +1,5 @@
-from pyformlang.regular_expression import *
 import pytest
+from pyformlang.regular_expression import *
 
 
 @pytest.fixture(scope='session', params=[
@@ -10,7 +10,7 @@ import pytest
         , 'accepts': ['abb', 'abc']
         , 'not accepts': ['abc', 'abbc']
     }
-    ,{
+    , {
         'r1': 'ab*'
         , 'r2': 'a*b'
         , 'exp': 'ab'

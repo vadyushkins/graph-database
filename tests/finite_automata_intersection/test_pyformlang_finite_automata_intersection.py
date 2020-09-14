@@ -1,5 +1,6 @@
 from pyformlang.finite_automaton import *
 
+
 def test_simple():
     s0 = State(0)
     s1 = State(1)

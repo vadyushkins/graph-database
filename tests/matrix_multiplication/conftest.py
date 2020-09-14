@@ -1,5 +1,5 @@
-import pygraphblas as pg
 import numpy as np
+import pygraphblas as pg
 import pytest
 
 
@@ -26,4 +26,3 @@ def matrix_multiplication_suite(request):
     fill(dst=exp_pg, src=exp)
 
     return {'left': a_pg, 'right': b_pg, 'expected': exp_pg}
-
