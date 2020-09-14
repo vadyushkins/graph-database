@@ -39,8 +39,8 @@ def suite(request):
         , 'regex': r
     }
     for r in ['(a*)', '(a|b)*', '(a|b|c)*']
-    for n in range(10)
-    for m in [n * (n - 1) // 2 // 100 * p for p in [0, 25, 50, 75, 100]]
+    for n in range(1, 10)
+    for m in [n * (n - 1) // 2 // 100 * p for p in [25, 50, 75, 100]]
 ])
 def automatic_suite(request):
     n = request.param['graph']
