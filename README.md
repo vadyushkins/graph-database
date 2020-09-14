@@ -22,7 +22,7 @@ And, after that, restart the terminal.
 
 Only non-empty graphs and non-empty queries are supported.
 
-```bash
+```
 usage: main.py [-h] --graph GRAPH --query QUERY [--sources SOURCES]
                [--destinations DESTINATIONS]
 
