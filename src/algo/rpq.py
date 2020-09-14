@@ -23,7 +23,8 @@ def transitive_closure(m: Matrix) -> Matrix:
         changed = False
 
         old_nnz = res.nvals
-        res += res @ res
+        tmp = res @ res
+        res += tmp
         new_nnz = res.nvals
 
         if new_nnz != old_nnz:

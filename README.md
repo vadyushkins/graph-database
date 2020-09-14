@@ -17,3 +17,21 @@ To run the installation script, execute the command:
 ```
 
 And, after that, restart the terminal.
+
+# How to use
+
+```bash
+usage: main.py [-h] --graph GRAPH --query QUERY [--sources SOURCES]
+               [--destinations DESTINATIONS]
+
+command line interface for simple graph database
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --graph GRAPH         path to graph.txt file
+  --query QUERY         path to query.txt file
+  --sources SOURCES     path to sources.txt file
+  --destinations DESTINATIONS
+                        path to destinations.txt file
+
+```
