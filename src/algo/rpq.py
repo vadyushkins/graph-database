@@ -4,11 +4,11 @@ from src.graph.LabeledGraph import LabeledGraph
 from src.graph.RegexGraph import RegexGraph
 
 
-def get_intersection(g: LabeledGraph, r: RegexGraph) -> LabeledGraph:
+def get_intersection(g: LabeledGraph, r: LabeledGraph) -> LabeledGraph:
     res = LabeledGraph(g.matrices_size * r.matrices_size)
 
     tmp = Matrix.sparse(BOOL, res.matrices_size, res.matrices_size)
-    for label in g.labels.keys():
+    for label in g:
         g[label].kronecker(r[label], out=tmp)
         res[label] += tmp
 
@@ -32,7 +32,7 @@ def transitive_closure(m: Matrix) -> Matrix:
     return res
 
 
-def rpq(g: LabeledGraph, r: RegexGraph):
+def rpq(g: LabeledGraph, r: LabeledGraph):
     k = get_intersection(g, r)
 
     m = Matrix.sparse(BOOL, k.matrices_size, k.matrices_size)

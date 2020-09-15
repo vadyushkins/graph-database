@@ -25,14 +25,14 @@ class LabeledGraph(Graph):
     def iseq(self, other):
         if not isinstance(other, LabeledGraph):
             return False
-        for label in self.matrices:
+        for label in self:
             if self.matrices[label].to_lists() != other.matrices[label].to_lists():
                 return False
         return True
 
     def print(self, prefix=None):
         print()
-        for label in self.matrices:
+        for label in self:
             print(f'{prefix}: Label {label}, matrix[label]: {self.matrices[label].to_lists()}')
 
     @classmethod
