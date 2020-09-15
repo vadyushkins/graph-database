@@ -1,32 +1,7 @@
-from pygraphblas import Matrix, INT64
 from pyformlang.finite_automaton import *
 
-def test_matrix_product():
-    a = Matrix.from_lists(
-        [0, 0, 1, 1],
-        [0, 1, 0, 1],
-        [1, 2, 3, 4],
-        typ=INT64,
-    )
-    b = Matrix.from_lists(
-        [0, 0, 1, 1],
-        [0, 1, 0, 1],
-        [5, 6, 7, 8],
-        typ=INT64,
-    )
 
-    actual = a @ b
-    expected = Matrix.from_lists(
-        [0, 0, 1, 1],
-        [0, 1, 0, 1],
-        [19, 22, 43, 50],
-        typ=INT64
-    )
-
-    assert expected.iseq(actual)
-
-
-def test_dfa_intersection():
+def test_simple():
     s0 = State(0)
     s1 = State(1)
 
@@ -61,3 +36,22 @@ def test_dfa_intersection():
 
     assert expected.is_equivalent_to(actual)
 
+
+def test_by_regex(finite_automata_intersection_suite):
+    a = finite_automata_intersection_suite['left']
+    b = finite_automata_intersection_suite['right']
+
+    actual = a.get_intersection(b)
+
+    expected = finite_automata_intersection_suite['expected']
+
+    def equal(fa1, fa2):
+        for s in finite_automata_intersection_suite['accepts']:
+            if fa1.accepts(s) != fa2.accepts(s):
+                return False
+        for s in finite_automata_intersection_suite['not accepts']:
+            if fa1.accepts(s) != fa2.accepts(s):
+                return False
+        return True
+
+    assert equal(expected, actual)
