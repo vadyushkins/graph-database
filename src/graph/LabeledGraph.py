@@ -10,6 +10,8 @@ class LabeledGraph(Graph):
         super().__init__()
         self.matrices = dict()
         self.matrices_size = matrices_size
+        self.start_states = set(range(matrices_size))
+        self.final_states = set(range(matrices_size))
 
     def __getitem__(self, item: str) -> Matrix:
         if item not in self.matrices:
@@ -34,6 +36,8 @@ class LabeledGraph(Graph):
         print()
         for label in self:
             print(f'{prefix}: Label {label}, matrix[label]: {self.matrices[label].to_lists()}')
+        print(f'{prefix}: start_states: {self.start_states}')
+        print(f'{prefix}: final_states: {self.final_states}')
 
     @classmethod
     def from_txt(cls, path):

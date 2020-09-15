@@ -18,6 +18,9 @@ class RegexGraph(LabeledGraph):
             self.append(f'{v} {label} {to}', compress=True)
             self[f'{label}'][self.vertices[v], self.vertices[to]] = True
 
+        self.start_states = set([self.vertices[self.dfa.start_state]])
+        self.final_states = set(map(self.vertices.get, self.dfa.final_states))
+
     def accepts(self, word):
         return self.dfa.accepts(word)
 
