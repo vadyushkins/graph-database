@@ -1,3 +1,5 @@
+from itertools import product
+
 from pygraphblas import *
 
 from src.graph.LabeledGraph import LabeledGraph
@@ -11,6 +13,14 @@ def get_intersection(g: LabeledGraph, r: LabeledGraph) -> LabeledGraph:
     for label in g:
         g[label].kronecker(r[label], out=tmp)
         res[label] += tmp
+
+    def map_coordinates(coordinates):
+        v_g = coordinates[0]
+        v_r = coordinates[1]
+        return v_g * r.matrices_size + v_r
+
+    res.start_states = set(map(map_coordinates, product(g.start_states, r.start_states)))
+    res.final_states = set(map(map_coordinates, product(g.final_states, r.final_states)))
 
     return res
 
@@ -48,9 +58,10 @@ def rpq(g: LabeledGraph, r: LabeledGraph):
     ans = Matrix.sparse(BOOL, g.matrices_size, g.matrices_size)
 
     for i, j, _ in zip(*tc.to_lists()):
-        v = get_coordinates(i, r.matrices_size)[0]
-        to = get_coordinates(j, r.matrices_size)[0]
-        ans[v, to] = True
+        if (i in k.start_states) and (j in k.final_states):
+            v = get_coordinates(i, r.matrices_size)[0]
+            to = get_coordinates(j, r.matrices_size)[0]
+            ans[v, to] = True
 
     return ans
 
