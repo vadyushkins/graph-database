@@ -33,8 +33,8 @@ def manual_suite(request):
 
 
 @pytest.fixture(scope='session', params=[
-    {'n': n, 'm': random.randint(1, n * (n - 1) // 2), 'r': r}
-    for n in range(2, 42)
+    {'n': n, 'm': random.randint(1, n * (n - 1) // 2 // 2), 'r': r}
+    for n in range(4, 10)
     for r in ['(a)(a)', '(a|b)*', '(a)(a|b)(c)']
 ])
 def automatic_suite(request):
