@@ -27,12 +27,12 @@ def test_simple():
     assert expected.iseq(actual)
 
 
-def test_by_numpy(matrix_multiplication_suite):
-    a = matrix_multiplication_suite['left']
-    b = matrix_multiplication_suite['right']
+def test_by_numpy(automatic_suite):
+    a = automatic_suite['left']
+    b = automatic_suite['right']
 
     actual = a @ b
 
-    expected = matrix_multiplication_suite['expected']
+    expected = automatic_suite['expected']
 
     assert expected.iseq(actual)

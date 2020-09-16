@@ -18,7 +18,7 @@ from pyformlang.regular_expression import *
         , 'not accepts': ['abb', 'aab']
     }
 ])
-def finite_automata_intersection_suite(request):
+def automatic_suite(request):
     regex1 = Regex(request.param['r1'])
     regex2 = Regex(request.param['r2'])
     exp = Regex(request.param['exp'])

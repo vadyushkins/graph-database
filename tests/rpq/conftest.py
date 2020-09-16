@@ -1,62 +1,51 @@
-import os
 import random
+from itertools import product
 
 import networkx
 import pytest
-from pyformlang.regular_expression import Regex
 
-from src.graph.LabeledGraph import LabeledGraph
-from src.graph.RegexGraph import RegexGraph
+random.seed(42)
 
-cwd = os.path.join(os.getcwd(), 'tests/rpq/suites')
-suites = filter(lambda path: path.startswith('test'), os.listdir(cwd))
+graphs = [
+    ['0 a 0']
+    , ['0 a 1', '1 b 2', '1 c 2']
+    , ['0 a 1', '1 a 0', '1 b 2', '2 b 3', '3 b 1']
+    , ['0 a 1', '1 a 2']
+]
 
-
-@pytest.fixture(scope='function', params=suites)
-def suite(request):
-    suite = request.param
-    suite_dir = f'{cwd}/{suite}/'
-
-    graph = suite_dir + 'graph.txt'
-    regex = suite_dir + 'regex.txt'
-    intersection = suite_dir + 'intersection.txt'
-    closure = suite_dir + 'closure.txt'
-    rpq = suite_dir + 'rpq.txt'
-
-    return {
-        'graph': graph
-        , 'regex': regex
-        , 'intersection': intersection
-        , 'closure': closure
-        , 'rpq': rpq
-    }
+regexes = [
+    '(a*)'
+    , '(a)(b*)(c*)'
+    , '(a|b)*'
+    , '(a)(a)'
+]
 
 
-@pytest.fixture(scope='function', params=[
+@pytest.fixture(scope='session', params=[
     {
-        'graph': n
-        , 'edges': m
-        , 'regex': r
+        'edges': edges
+        , 'regex': regex
     }
-    for r in ['(a*)', '(a|b)*', '(a|b|c)*']
-    for n in range(1, 10)
-    for m in [n * (n - 1) // 2 // 100 * p for p in [25, 50, 75, 100]]
+    for edges, regex in product(graphs, regexes)
+])
+def manual_suite(request):
+    return request.param
+
+
+@pytest.fixture(scope='session', params=[
+    {'n': n, 'm': random.randint(1, n * (n - 1) // 2), 'r': r}
+    for n in range(2, 42)
+    for r in ['(a)(a)', '(a|b)*', '(a)(a|b)(c)']
 ])
 def automatic_suite(request):
-    n = request.param['graph']
-    m = request.param['edges']
+    n, m, r = request.param.values()
 
-    graph = networkx.gnm_random_graph(n, m, seed=42, directed=True)
-
-    g = LabeledGraph(n)
-    r = RegexGraph(Regex(request.param['regex']))
-
-    random.seed(42)
-
-    for i, j in graph.edges:
-        g[chr(ord('a') + random.randint(0, 2))][i, j] = True
+    random_graph = networkx.gnm_random_graph(n, m, seed=42, directed=True)
 
     return {
-        'graph': g
+        'edges': [
+            f'{i} {"abc"[random.randint(0, 2)]} {j}'
+            for i, j in random_graph.edges
+        ]
         , 'regex': r
     }

@@ -4,7 +4,7 @@ import pytest
 
 
 @pytest.fixture(scope='session', params=[i for i in range(42)])
-def matrix_multiplication_suite(request):
+def automatic_suite(request):
     n = request.param
 
     a = np.random.randint(low=42, high=4242, size=(n, n), dtype=np.int64)
