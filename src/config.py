@@ -1,1 +1,0 @@
-MAX_MATRICES_SIZE = int(1e6)

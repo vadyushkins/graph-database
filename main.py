@@ -1,6 +1,6 @@
 import argparse
 
-from src.algo.rpq import execute_rpq
+from src.RegularPathQuering import execute_rpq
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='command line interface for simple graph database')

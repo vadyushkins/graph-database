@@ -37,19 +37,19 @@ def test_simple():
     assert expected.is_equivalent_to(actual)
 
 
-def test_by_regex(finite_automata_intersection_suite):
-    a = finite_automata_intersection_suite['left']
-    b = finite_automata_intersection_suite['right']
+def test_by_regex(automatic_suite):
+    a = automatic_suite['left']
+    b = automatic_suite['right']
 
     actual = a.get_intersection(b)
 
-    expected = finite_automata_intersection_suite['expected']
+    expected = automatic_suite['expected']
 
     def equal(fa1, fa2):
-        for s in finite_automata_intersection_suite['accepts']:
+        for s in automatic_suite['accepts']:
             if fa1.accepts(s) != fa2.accepts(s):
                 return False
-        for s in finite_automata_intersection_suite['not accepts']:
+        for s in automatic_suite['not accepts']:
             if fa1.accepts(s) != fa2.accepts(s):
                 return False
         return True
