@@ -2,6 +2,14 @@ language: python
 cache: pip
 jobs:
   include:
+    - stage: "Test in Linux"
+      os: linux
+      python: "3.8.0"
+      language: bash
+      script:
+        - sudo ./install.sh
+        - sudo conda activate test-environment || bash activate test-environment
+        - python3 -m pytest -v -s
     - stage: "Test in Docker"
       services:
         - docker
@@ -9,13 +17,6 @@ jobs:
       script:
         - docker build -t graph-database .
         - docker run -it --rm -v "$PWD":/graph-database graph-database python3 -m pytest -v -s
-    - stage: "Test in Linux"
-      os: linux
-      python: "3.8.0"
-      script:
-        - bash install.sh
-        - sudo conda activate test-environment || bash activate test-environment
-        - pytest -v -s
     - stage: "Test in macOS"
       os: osx
       osx_image: xcode12u
