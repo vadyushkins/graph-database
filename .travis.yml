@@ -2,12 +2,6 @@ language: python
 cache: pip
 jobs:
   include:
-    - stage: "Test in Linux"
-      os: linux
-      python: "3.8.0"
-      language: bash
-      script:
-        - bash install.sh
     - stage: "Test in Docker"
       services:
         - docker
@@ -15,6 +9,12 @@ jobs:
       script:
         - docker build -t graph-database .
         - docker run -it --rm -v "$PWD":/graph-database graph-database python3 -m pytest -v -s
+    - stage: "Test in Linux"
+      os: linux
+      python: "3.8.0"
+      language: bash
+      script:
+        - bash install.sh
     - stage: "Test in macOS"
       os: osx
       osx_image: xcode12u
