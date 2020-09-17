@@ -23,4 +23,4 @@ conda install pygraphblas
 export PYTHONPATH="${PYTHONPATH}:./"
 pip3 install --upgrade pip
 pip install -r requirements.txt
-python3 -m pytest
+python3 -m pytest -v -s
