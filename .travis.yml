@@ -13,9 +13,9 @@ jobs:
       os: linux
       python: "3.8.0"
       script:
-        - bash install.sh
-        - bash conda activate test-environment || bash activate test-environment
-        - python3 -m pytest -v -s
+        - sudo ./install.sh
+        - sudo conda activate test-environment || bash activate test-environment
+        - pytest -v -s
     - stage: "Test in macOS"
       os: osx
       osx_image: xcode12u
