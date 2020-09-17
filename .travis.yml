@@ -8,8 +8,6 @@ jobs:
       language: bash
       script:
         - bash install.sh
-        - source activate test-environment
-        - python3 -m pytest -v -s
     - stage: "Test in Docker"
       services:
         - docker
@@ -23,5 +21,3 @@ jobs:
       language: shell
       script:
         - bash install.sh
-        - source activate test-environment
-        - python3 -m pytest -v -s
