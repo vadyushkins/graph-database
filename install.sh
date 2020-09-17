@@ -1,19 +1,24 @@
 conda --version
 if [[ $? -ne 0 ]]; then
-  wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
-  bash miniconda.sh -b -p $HOME/miniconda
+  case "$OSTYPE" in
+    linux*)  wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh ;;
+    darwin*) wget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh ;;
+  esac
+
+  bash ./miniconda.sh -b -p $HOME/miniconda
   source "$HOME/miniconda/etc/profile.d/conda.sh"
-  conda init
-  echo "export PATH=\"$HOME/miniconda/bin:$PATH\"" >> $HOME/.bashrc
-  source "$HOME/.bashrc"
   hash -r
+  conda init bash
   conda config --set always_yes yes --set changeps1 yes
   conda update -q conda
-  # Useful for debugging any issues with conda
+  # Useful for debugging issues with conda
   conda info -a
 fi
+
 conda config --add channels conda-forge
-conda create -q -n graph-database-environment python=3.8 pygraphblas pytest
-conda activate graph-database-environment
-conda install pygraphblas
+conda create -q -n test-environment python=3.8
+conda activate test-environment || activate test-environment
+conda install pygraphblas=3.4.0
+export PYTHONPATH="${PYTHONPATH}:./"
+pip3 install --upgrade pip
 pip install -r requirements.txt
