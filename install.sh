@@ -6,6 +6,7 @@ if [[ $? -ne 0 ]]; then
   esac
 
   bash ./miniconda.sh -b -p $HOME/miniconda
+  export PATH=$HOME/miniconda:$PATH
   source "$HOME/miniconda/etc/profile.d/conda.sh"
   hash -r
   conda init bash
