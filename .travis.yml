@@ -7,8 +7,8 @@ jobs:
       python: "3.8.0"
       language: bash
       script:
-        - sudo ./install.sh
-        - sudo conda activate test-environment || bash activate test-environment
+        - bash install.sh
+        - source activate test-environment
         - python3 -m pytest -v -s
     - stage: "Test in Docker"
       services:
@@ -23,5 +23,5 @@ jobs:
       language: shell
       script:
         - bash install.sh
-        - conda activate test-environment || activate test-environment
+        - source activate test-environment
         - python3 -m pytest -v -s
