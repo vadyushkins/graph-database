@@ -8,7 +8,7 @@ jobs:
       python: "3.8.0"
       script:
         - docker build -t graph-database .
-        - docker run -it --rm -v "$PWD":/graph-database graph-database python3 -m pytest -v -s
+        - docker run -it --rm -v "$PWD":/graph-database graph-database python3 -m pytest -v -s  --ignore=tests/benchmark_rpq
     - name: "Test in Linux"
       os: linux
       python: "3.8.0"
