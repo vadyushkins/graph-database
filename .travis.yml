@@ -26,5 +26,4 @@ jobs:
       python: "3.8.0"
       language: bash
       script:
-        - bash install.sh
         - bash benchmark_rpq.sh
