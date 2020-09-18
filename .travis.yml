@@ -27,4 +27,5 @@ jobs:
       language: bash
       script:
         - bash install.sh
+        - export PATH=$HOME/miniconda/bin:$PATH
         - bash benchmark_rpq.sh
