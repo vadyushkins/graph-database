@@ -4,17 +4,7 @@ from src.LabeledGraph import LabeledGraph
 
 
 def rpq(g: LabeledGraph, r: LabeledGraph) -> Matrix:
-    kron = g.get_intersection(r)
-
-    tc = Matrix.sparse(BOOL, kron.size, kron.size)
-    for label in kron.labels:
-        tc += kron[label]
-
-    while True:
-        prev = tc.nvals
-        tc += tc @ tc
-        if prev == tc.nvals:
-            break
+    tc = g.get_intersection(r).get_transitive_closure()
 
     ans = Matrix.sparse(BOOL, g.size, g.size)
     for i, j, _ in zip(*tc.select(lib.GxB_NONZERO).to_lists()):

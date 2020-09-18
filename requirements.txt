@@ -1,3 +1,6 @@
 pyformlang
 pytest
+pytest-benchmark
+pytest-benchmark[histogram]
 networkx
+tqdm

@@ -15,7 +15,7 @@ if [[ $? -ne 0 ]]; then
   # Useful for debugging issues with conda
   conda info -a
 fi
-
+cd tests/benchmark_rpq/ ; gdown https://drive.google.com/uc?id=1ZZ8FI6MxQ2rWIRxBQjZOVw64zHdbxcmm ; cd ../../
 conda config --add channels conda-forge
 conda create -q -n test-environment python=3.8
 conda activate test-environment || activate test-environment

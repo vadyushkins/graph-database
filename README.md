@@ -1,5 +1,25 @@
+<table>
+<tr>
+<th>
+dev
+</th>
+<th>
+master
+</th>
+</tr>
+<tr>
+<td>
+
 [![Build Status](https://travis-ci.com/viabzalov/graph-database.svg?branch=dev)](https://travis-ci.com/viabzalov/graph-database)
+
+</td>
+<td>
+
 [![Build Status](https://travis-ci.com/viabzalov/graph-database.svg?branch=master)](https://travis-ci.com/viabzalov/graph-database)
+
+</td>
+</tr>
+</table>
 
 # graph-database
 Simple graph database on Python
