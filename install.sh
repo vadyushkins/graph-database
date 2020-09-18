@@ -20,6 +20,7 @@ conda create -q -n test-environment python=3.8
 conda activate test-environment || activate test-environment
 conda install pygraphblas
 export PYTHONPATH="${PYTHONPATH}:./"
+export PATH=$HOME/miniconda/bin:$PATH
 pip3 install --upgrade pip
 pip install -r requirements.txt
 cd tests/benchmark_rpq/ ; gdown https://drive.google.com/uc?id=1ZZ8FI6MxQ2rWIRxBQjZOVw64zHdbxcmm ; cd ../../
