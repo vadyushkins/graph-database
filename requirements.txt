@@ -2,5 +2,6 @@ pyformlang
 pytest
 pytest-benchmark
 pytest-benchmark[histogram]
+gdown
 networkx
 tqdm
