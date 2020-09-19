@@ -22,5 +22,4 @@ conda install pygraphblas
 export PYTHONPATH="${PYTHONPATH}:./"
 pip3 install --upgrade pip
 pip install -r requirements.txt
-cd tests/benchmark_rpq/ ; gdown https://drive.google.com/uc?id=1ZZ8FI6MxQ2rWIRxBQjZOVw64zHdbxcmm ; cd ../../
 python3 -m pytest -v -s tests/
