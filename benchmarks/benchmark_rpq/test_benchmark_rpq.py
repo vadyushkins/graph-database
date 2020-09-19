@@ -26,7 +26,7 @@ def test_benchmark_rpq(impl, graph, regex):
     if not os.path.exists(result_file_path):
         append_headers = True
 
-    with open(result_file_path, mode='a', newline='\n') as csv_f:
+    with open(result_file_path, mode='a+', newline='\n') as csv_f:
         csv_writer = csv.writer(csv_f, delimiter=',', quoting=csv.QUOTE_NONNUMERIC, escapechar=' ')
         headers = [
             'Implementation'

@@ -66,8 +66,6 @@ suites = [
     for regex in glob(f'{data_for_rpq_dir}/regexes/*')
 ]
 
-print(suites[0])
-
 params = [
     pytest.param(
         {'impl': x['impl'], 'name': x['impl_name']}
