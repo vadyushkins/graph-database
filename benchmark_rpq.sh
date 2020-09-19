@@ -25,4 +25,4 @@ pip install -r requirements.txt
 cd benchmarks/benchmark_rpq/ ; gdown https://drive.google.com/uc?id=10-_dc8fJsndRbzSJH9vsUBFWN-LiTZUN ; cd ../../
 rm -rf .benchmarks
 pwd
-python3 -m pytest -v -s benchmarks/benchmark_rpq/test_benchmark_rpq.py
+python3 -m pytest -v -s benchmarks/benchmark_rpq/test_benchmark_rpq.py -m 'geospecies and q1_0'
