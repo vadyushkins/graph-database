@@ -18,7 +18,7 @@ fi
 conda config --add channels conda-forge
 conda create -q -n test-environment python=3.8
 conda activate test-environment || activate test-environment
-conda install pygraphblas
+conda install pygraphblas=3.2.0
 export PYTHONPATH="${PYTHONPATH}:./"
 pip3 install --upgrade pip
 pip install -r requirements.txt
