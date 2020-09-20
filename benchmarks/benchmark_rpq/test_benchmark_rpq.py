@@ -26,7 +26,7 @@ def test_benchmark_rpq(impl, graph, regex):
     if not os.path.exists(result_file_path):
         append_headers = True
 
-    with open(result_file_path, mode='w', newline='\n') as csv_f:
+    with open(result_file_path, mode='a+', newline='\n') as csv_f:
         csv_writer = csv.writer(csv_f, delimiter=',', quoting=csv.QUOTE_NONNUMERIC, escapechar=' ')
         headers = [
             'Implementation'
@@ -51,4 +51,4 @@ def test_benchmark_rpq(impl, graph, regex):
         results = [impl_name, g_name, r_name, min(times), max(times), sum(times) / len(times)]
 
         csv_writer.writerow(results)
-        print(results)
+        print([f'{key}: {value}' for key, value in zip(headers, results)])
