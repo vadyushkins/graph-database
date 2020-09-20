@@ -51,4 +51,4 @@ def test_benchmark_rpq(impl, graph, regex):
         results = [impl_name, g_name, r_name, min(times), max(times), sum(times) / len(times)]
 
         csv_writer.writerow(results)
-        print([f'{key}: {value}' for key, value in zip(headers, results)])
+        print('\n', [f'{key}: {value}' for key, value in zip(headers, results)])

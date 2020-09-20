@@ -62,8 +62,8 @@ suites = [
         , LabeledGraphWithLinearTransitiveClosure
         , LabeledGraphWithSelectTransitiveClosure
     ]
-    for graph in glob(f'{data_for_rpq_dir}/graphs/*')
-    for regex in glob(f'{data_for_rpq_dir}/regexes/*')
+    for graph in glob(f'{data_for_rpq_dir}/*/*.txt')
+    for regex in glob(f'{data_for_rpq_dir}/{Path(graph).stem}/regexes/*')
 ]
 
 params = [
