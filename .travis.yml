@@ -26,4 +26,4 @@ jobs:
         - docker
       python: "3.8.0"
       script:
-        - docker run -it --rm -p 8787:8787 viabzalov/pygraphblas-database:latest python3 -m pytest -v -s benchmarks/benchmark_rpq/test_benchmark_rpq.py
+        - docker run -it --rm -p 8787:8787 viabzalov/pygraphblas-database:latest python3 -m pytest -v -s benchmarks/benchmark_rpq/test_benchmark_rpq.py -m "geospecies"

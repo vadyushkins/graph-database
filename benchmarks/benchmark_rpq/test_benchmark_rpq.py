@@ -32,23 +32,19 @@ def test_benchmark_rpq(impl, graph, regex):
             'Implementation'
             , 'Graph'
             , 'Regex'
-            , 'Min time (in microseconds)'
-            , 'Max time (in microseconds)'
-            , 'Average time (in microseconds)'
+            , 'Time (in microseconds)'
         ]
 
         if append_headers:
             csv_writer.writerow(headers)
 
-        times = []
-        for i in range(5):
-            start_time = time.time_ns()
-            rpq(g, r)
-            end_time = time.time_ns()
+        start_time = time.time_ns()
+        rpq(g, r)
+        end_time = time.time_ns()
 
-            times.append((end_time - start_time) // (10 ** 3))
+        result_time = (end_time - start_time) // (10 ** 3)
 
-        results = [impl_name, g_name, r_name, min(times), max(times), sum(times) / len(times)]
+        results = [impl_name, g_name, r_name, result_time]
 
         csv_writer.writerow(results)
         print('\n', [f'{key}: {value}' for key, value in zip(headers, results)])
