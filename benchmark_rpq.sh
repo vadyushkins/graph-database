@@ -1,4 +1,4 @@
-if [ -f benchmarks/benchmark_rpq/myDataForRPQ.zip ]; then
+if [ ! -f benchmarks/benchmark_rpq/myDataForRPQ.zip ]; then
   cd benchmarks/benchmark_rpq/
   gdown https://drive.google.com/uc?id=19L7RUCJlkgWQpQRnp6hMb7MLXibB4jTp
   cd ../../
