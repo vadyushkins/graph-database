@@ -22,21 +22,19 @@ def test_benchmark_rpq(impl, graph, regex):
     result_file = f'{g_name}.csv'
     result_file_path = f'./benchmarks/benchmark_rpq/results/{result_file}'
 
-    append_headers = False
-    if not os.path.exists(result_file_path):
-        append_headers = True
+    headers = [
+        'Implementation'
+        , 'Graph'
+        , 'Regex'
+        , 'Time (in microseconds)'
+    ]
 
-    with open(result_file_path, mode='a+', newline='\n') as csv_f:
-        csv_writer = csv.writer(csv_f, delimiter=',', quoting=csv.QUOTE_NONNUMERIC, escapechar=' ')
-        headers = [
-            'Implementation'
-            , 'Graph'
-            , 'Regex'
-            , 'Time (in microseconds)'
-        ]
+    with open(result_file_path, mode='w+', newline='\n') as f:
+        csv_writer = csv.writer(f, delimiter=',', quoting=csv.QUOTE_NONNUMERIC, escapechar=' ')
+        csv_writer.writerow(headers)
 
-        if append_headers:
-            csv_writer.writerow(headers)
+    with open(result_file_path, mode='a+', newline='\n') as f:
+        csv_writer = csv.writer(f, delimiter=',', quoting=csv.QUOTE_NONNUMERIC, escapechar=' ')
 
         start_time = time.time_ns()
         rpq(g, r)
@@ -47,4 +45,3 @@ def test_benchmark_rpq(impl, graph, regex):
         results = [impl_name, g_name, r_name, result_time]
 
         csv_writer.writerow(results)
-        print('\n', [f'{key}: {value}' for key, value in zip(headers, results)])
