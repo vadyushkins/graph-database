@@ -48,3 +48,5 @@ def test_benchmark_rpq(impl, graph, regex):
         results = [impl_name, g_name, r_name, result_time]
 
         csv_writer.writerow(results)
+
+        f.flush()
