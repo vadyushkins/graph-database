@@ -21,8 +21,11 @@ class LabeledGraphWithLinearTransitiveClosure(LabeledGraph):
             res += self[label]
 
         tmp = res.dup()
-        for i in range(self.size):
+        while True:
+            prev = res.nvals
             res += res @ tmp
+            if prev == res.nvals:
+                break
 
         return res
 

@@ -1,12 +1,12 @@
-from pathlib import Path
-
-import pytest
-import os
 import csv
+import os
 import time
 
-from src.RegularPathQuering import rpq
+import pytest
 from conftest import params
+from pygraphblas import *
+
+from src.RegularPathQuering import rpq
 
 
 @pytest.mark.parametrize('impl,graph,regex', params)
@@ -27,6 +27,7 @@ def test_benchmark_rpq(impl, graph, regex):
         , 'Graph'
         , 'Regex'
         , 'Time (in microseconds)'
+        , 'Control sum'
     ]
 
     if not os.path.exists(result_file_path):
@@ -38,11 +39,11 @@ def test_benchmark_rpq(impl, graph, regex):
         csv_writer = csv.writer(f, delimiter=',', quoting=csv.QUOTE_NONNUMERIC, escapechar=' ')
 
         start_time = time.time_ns()
-        rpq(g, r)
+        res = rpq(g, r)
         end_time = time.time_ns()
 
         result_time = (end_time - start_time) // (10 ** 3)
 
-        results = [impl_name, g_name, r_name, result_time]
+        results = [impl_name, g_name, r_name, result_time, res.select(lib.GxB_NONZERO).nvals]
 
         csv_writer.writerow(results)
