@@ -29,6 +29,9 @@ def test_benchmark_rpq(impl, graph, regex):
         , 'Time (in microseconds)'
     ]
 
+    if not os.path.exists(result_file_path):
+        open(result_file_path, 'w+').close()
+
     with open(result_file_path, mode='w+', newline='\n') as f:
         csv_writer = csv.writer(f, delimiter=',', quoting=csv.QUOTE_NONNUMERIC, escapechar=' ')
         csv_writer.writerow(headers)
