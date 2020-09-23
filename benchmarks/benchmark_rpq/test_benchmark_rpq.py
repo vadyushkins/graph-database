@@ -29,14 +29,11 @@ def test_benchmark_rpq(impl, graph, regex):
         , 'Time (in microseconds)'
     ]
 
-    if not os.path.exists(result_file_path):
-        open(result_file_path, 'w+').close()
-
     with open(result_file_path, mode='w+', newline='\n') as f:
         csv_writer = csv.writer(f, delimiter=',', quoting=csv.QUOTE_NONNUMERIC, escapechar=' ')
         csv_writer.writerow(headers)
 
-    with open(result_file_path, mode='a+', newline='\n') as f:
+    with open(result_file_path, mode='a+', newline='\n', buffering=1) as f:
         csv_writer = csv.writer(f, delimiter=',', quoting=csv.QUOTE_NONNUMERIC, escapechar=' ')
 
         start_time = time.time_ns()
@@ -48,5 +45,3 @@ def test_benchmark_rpq(impl, graph, regex):
         results = [impl_name, g_name, r_name, result_time]
 
         csv_writer.writerow(results)
-
-        f.flush()
