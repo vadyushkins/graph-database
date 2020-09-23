@@ -33,7 +33,7 @@ def test_benchmark_rpq(impl, graph, regex):
         csv_writer = csv.writer(f, delimiter=',', quoting=csv.QUOTE_NONNUMERIC, escapechar=' ')
         csv_writer.writerow(headers)
 
-    with open(result_file_path, mode='a+', newline='\n', buffering=1) as f:
+    with open(result_file_path, mode='a+', newline='\n') as f:
         csv_writer = csv.writer(f, delimiter=',', quoting=csv.QUOTE_NONNUMERIC, escapechar=' ')
 
         start_time = time.time_ns()
