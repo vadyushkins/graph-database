@@ -9,7 +9,7 @@ from pygraphblas import *
 from src.LabeledGraph import LabeledGraph
 
 cwd = './benchmarks/benchmark_rpq'
-data_for_rpq_dir = cwd + '/manualDataForRPQ'
+data_for_rpq_dir = cwd + '/myDataForRPQ'
 
 
 class LabeledGraphWithLinearTransitiveClosure(LabeledGraph):
