@@ -9,6 +9,7 @@ from pygraphblas import *
 from src.LabeledGraph import LabeledGraph
 
 cwd = './benchmarks/benchmark_rpq'
+results_dir = cwd + '/results'
 data_for_rpq_dir = cwd + '/myDataForRPQ'
 
 
@@ -46,6 +47,9 @@ class LabeledGraphWithSelectTransitiveClosure(LabeledGraph):
 if not os.path.exists(data_for_rpq_dir):
     os.mkdir(data_for_rpq_dir)
     shutil.unpack_archive(data_for_rpq_dir + '.zip', cwd)
+
+if not os.path.exists(results_dir):
+    os.mkdir(results_dir)
 
 suites = [
     {
