@@ -15,7 +15,6 @@ if [[ $? -ne 0 ]]; then
   # Useful for debugging issues with conda
   conda info -a
 fi
-
 conda config --add channels conda-forge
 conda create -q -n test-environment python=3.8
 conda activate test-environment || activate test-environment
@@ -23,4 +22,4 @@ conda install pygraphblas
 export PYTHONPATH="${PYTHONPATH}:./"
 pip3 install --upgrade pip
 pip install -r requirements.txt
-python3 -m pytest -v -s
+python3 -m pytest -v -s tests/

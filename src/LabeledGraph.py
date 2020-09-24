@@ -37,6 +37,20 @@ class LabeledGraph:
 
         return nfa.accepts(word)
 
+    def get_transitive_closure(self) -> Matrix:
+        res = Matrix.sparse(BOOL, self.size, self.size)
+
+        for label in self.labels:
+            res += self[label]
+
+        while True:
+            prev = res.nvals
+            res += res @ res
+            if prev == res.nvals:
+                break
+
+        return res
+
     def get_intersection(self, other):
         kron = LabeledGraph(self.size * other.size)
 

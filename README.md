@@ -1,5 +1,25 @@
+<table>
+<tr>
+<th>
+dev
+</th>
+<th>
+master
+</th>
+</tr>
+<tr>
+<td>
+
 [![Build Status](https://travis-ci.com/viabzalov/graph-database.svg?branch=dev)](https://travis-ci.com/viabzalov/graph-database)
+
+</td>
+<td>
+
 [![Build Status](https://travis-ci.com/viabzalov/graph-database.svg?branch=master)](https://travis-ci.com/viabzalov/graph-database)
+
+</td>
+</tr>
+</table>
 
 # graph-database
 Simple graph database on Python
@@ -49,3 +69,15 @@ optional arguments:
                         path to destinations.txt file
 
 ```
+
+# Benchmark RPQ
+
+In order to run benchmarks you need a [dataset](https://drive.google.com/file/d/19L7RUCJlkgWQpQRnp6hMb7MLXibB4jTp/view?usp=sharing). 
+You can download the dataset using gdown or manually from Google Drive.
+All this can be done by 
+* running the script `benchmark_rpq.sh` 
+* or by using docker ```docker run -it --rm -p 8787:8787 viabzalov/pygraphblas-database:latest python3 -m pytest -v -s benchmarks/benchmark_rpq/test_benchmark_rpq.py```
+
+Results obtained on a computer with OS Ubuntu 20.04, Intel core i7-4790 CPU 3.60 GHz, DDR3 32Gb RAM on graphs [`LUBM300`, `LUBM500`, `LUBM1M`, `LUBM1.5M`] showed that there is no difference between linear and quadratic algorithms for calculating transitive closure
+
+More detailed results can be found in `benchmarks/benchmark_rpq/results/analytics.ipynb` or `benchmarks/benchmark_rpq/results/analytics.pdf`
