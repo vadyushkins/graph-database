@@ -80,4 +80,4 @@ All this can be done by
 
 Results obtained on a computer with OS Ubuntu 20.04, Intel core i7-4790 CPU 3.60 GHz, DDR3 32Gb RAM on graphs [`LUBM300`, `LUBM500`, `LUBM1M`, `LUBM1.5M`] showed that there is no difference between linear and quadratic algorithms for calculating transitive closure
 
-More detailed results can be found in `benchmarks/benchmark_rpq/results/analytics.ipynb`
+More detailed results can be found in `benchmarks/benchmark_rpq/results/analytics.ipynb` or `benchmarks/benchmark_rpq/results/analytics.pdf`
