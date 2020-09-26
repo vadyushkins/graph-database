@@ -1,8 +1,8 @@
 import pytest
 
-from pyformlang.cfg import *
+from src.MyCNF import MyCNF
 
-cfgs = [
+grammars = [
     'S -> a S b S\nS -> '
     , 'S -> a S b\nS -> '
     , 'S -> S S\nS -> a'
@@ -12,51 +12,51 @@ cfgs = [
 
 @pytest.fixture(scope='session', params=[
     {
-        'cfg': CFG.from_text(cfgs[0]).to_normal_form()
-        , 'accepted': list(map(lambda x: Terminal(x), 'aabbab'))
+        'cnf': MyCNF.from_text(grammars[0])
+        , 'accepted': 'aabbab'
     }
     ,{
-        'cfg': CFG.from_text(cfgs[1]).to_normal_form()
-        , 'accepted': list(map(lambda x: Terminal(x), 'aabb'))
+        'cnf': MyCNF.from_text(grammars[1])
+        , 'accepted': 'aabb'
     }
 ])
-def manual_suite_accepted(request):
+def accepted_manual_suite(request):
     return request.param
 
 
 @pytest.fixture(scope='session', params=[
     {
-        'cfg': CFG.from_text(cfgs[0]).to_normal_form()
-        , 'not accepted': list(map(lambda x: Terminal(x), 'aba'))
+        'cnf': MyCNF.from_text(grammars[0])
+        , 'not accepted': 'aabcbab'
     }
     ,{
-        'cfg': CFG.from_text(cfgs[1]).to_normal_form()
-        , 'not accepted': list(map(lambda x: Terminal(x), 'aaab'))
+        'cnf': MyCNF.from_text(grammars[1])
+        , 'not accepted': 'aacbb'
     }
 ])
-def manual_suite_not_accepted(request):
+def not_accepted_manual_suite(request):
     return request.param
 
 
 @pytest.fixture(scope='session', params=[
     {
-        'cfg': CFG.from_text(cfg).to_normal_form()
-        , 'accepted': accepted
+        'cnf': MyCNF.from_text(gr)
+        , 'accepted': ''.join(map(lambda x: x.value, accepted))
     }
-    for cfg in cfgs
-    for accepted in CFG.from_text(cfg).get_words(4)
+    for gr in grammars
+    for accepted in MyCNF.from_text(gr).cfg.get_words(10)
 ])
-def automatic_suite_accepted(request):
+def accepted_automatic_suite(request):
     return request.param
 
 
 @pytest.fixture(scope='session', params=[
     {
-        'cfg': CFG.from_text(cfg).to_normal_form()
-        , 'not accepted': not_accepted + [Terminal('c')]
+        'cnf': MyCNF.from_text(gr)
+        , 'not accepted': ''.join(map(lambda x: x.value, not_accepted)) + 'c'
     }
-    for cfg in cfgs
-    for not_accepted in CFG.from_text(cfg).get_words(4)
+    for gr in grammars
+    for not_accepted in MyCNF.from_text(gr).cfg.get_words(10)
 ])
-def automatic_suite_not_accepted(request):
+def not_accepted_automatic_suite(request):
     return request.param
