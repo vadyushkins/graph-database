@@ -2,22 +2,24 @@ import pytest
 
 from src.MyCNF import MyCNF
 
+from pyformlang.cfg import *
+
 grammars = [
     'S -> a S b S\nS -> '
     , 'S -> a S b\nS -> '
     , 'S -> S S\nS -> a'
-    , 'S -> A B\nA -> A a\nB -> b B\nA -> a\nB -> b'
+    , 'S -> A B\nA -> A A\nB -> B B\nA -> a\nB -> b'
 ]
 
 
 @pytest.fixture(scope='session', params=[
     {
         'cnf': MyCNF.from_text(grammars[0])
-        , 'accepted': 'aabbab'
+        , 'accepted': [Terminal(x) for x in 'aabbab']
     }
     ,{
         'cnf': MyCNF.from_text(grammars[1])
-        , 'accepted': 'aabb'
+        , 'accepted': [Terminal(x) for x in 'aabb']
     }
 ])
 def accepted_manual_suite(request):
@@ -27,11 +29,11 @@ def accepted_manual_suite(request):
 @pytest.fixture(scope='session', params=[
     {
         'cnf': MyCNF.from_text(grammars[0])
-        , 'not accepted': 'aabcbab'
+        , 'not accepted': [Terminal(x) for x in 'aabcbab']
     }
     ,{
         'cnf': MyCNF.from_text(grammars[1])
-        , 'not accepted': 'aacbb'
+        , 'not accepted': [Terminal(x) for x in 'aacbb']
     }
 ])
 def not_accepted_manual_suite(request):
@@ -41,10 +43,10 @@ def not_accepted_manual_suite(request):
 @pytest.fixture(scope='session', params=[
     {
         'cnf': MyCNF.from_text(gr)
-        , 'accepted': ''.join(map(lambda x: x.value, accepted))
+        , 'accepted': accepted
     }
     for gr in grammars
-    for accepted in MyCNF.from_text(gr).cfg.get_words(10)
+    for accepted in CFG.from_text(gr).get_words(10)
 ])
 def accepted_automatic_suite(request):
     return request.param
@@ -53,10 +55,10 @@ def accepted_automatic_suite(request):
 @pytest.fixture(scope='session', params=[
     {
         'cnf': MyCNF.from_text(gr)
-        , 'not accepted': ''.join(map(lambda x: x.value, not_accepted)) + 'c'
+        , 'not accepted': not_accepted + [Terminal('c')]
     }
     for gr in grammars
-    for not_accepted in MyCNF.from_text(gr).cfg.get_words(10)
+    for not_accepted in CFG.from_text(gr).get_words(10)
 ])
 def not_accepted_automatic_suite(request):
     return request.param
