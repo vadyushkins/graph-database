@@ -13,13 +13,13 @@ class LabeledGraph:
         self.start_states = set()
         self.final_states = set()
 
-    def __getitem__(self, item: str) -> Matrix:
+    def __getitem__(self, item) -> Matrix:
         if item not in self.matrices:
             self.matrices[item] = Matrix.sparse(BOOL, self.size, self.size)
             self.labels.add(item)
         return self.matrices[item]
 
-    def __setitem__(self, key: str, value: Matrix):
+    def __setitem__(self, key, value: Matrix):
         self.labels.add(key)
         self.matrices[key] = value
 
