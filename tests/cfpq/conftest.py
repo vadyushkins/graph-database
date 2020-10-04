@@ -2,11 +2,18 @@ from itertools import product
 
 import pytest
 
+from src.CFPQ import Hellings, Azimov
+
 grammars = [
     'S -> a S b S\nS -> '
     , 'S -> a S b\nS -> '
     , 'S -> S S\nS -> a'
     , 'S -> A B\nA -> A A\nB -> B B\nA -> a\nB -> b'
+]
+
+algorithms = [
+    Hellings.cfpq,
+    Azimov.cfpq
 ]
 
 
@@ -28,4 +35,9 @@ grammars = [
     }
 ])
 def manual_suite(request):
+    return request.param
+
+
+@pytest.fixture(scope='session', params=algorithms)
+def algo(request):
     return request.param
