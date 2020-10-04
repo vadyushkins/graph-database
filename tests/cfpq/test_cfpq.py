@@ -11,7 +11,7 @@ def test_manual(manual_suite, tmp_path):
 
     gr = MyCNF.from_text(manual_suite['cnf'])
 
-    actual = set(zip(*cfpq(g, gr).to_lists()[:2]))
+    actual = cfpq(g, gr)
 
     expected = manual_suite['expected']
 
