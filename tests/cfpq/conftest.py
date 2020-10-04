@@ -5,10 +5,12 @@ import pytest
 from src.CFPQ import Hellings, Azimov, Tensor
 
 grammars = [
-    'S -> a S b S\nS -> '
-    , 'S -> a S b\nS -> '
-    , 'S -> S S\nS -> a'
-    , 'S -> A B\nA -> A A\nB -> B B\nA -> a\nB -> b'
+    '\n'.join(['S -> a S b S', 'S -> '])
+    , '\n'.join(['S -> a S b', 'S -> '])
+    , '\n'.join(['S -> S S', 'S -> a', 'S -> '])
+    , '\n'.join(['S -> A B', 'A -> A A', 'B -> B B', 'A -> a', 'B -> b'])
+    , '\n'.join(['S -> b S b b', 'S -> A', 'A -> a A', 'A -> '])
+    , '\n'.join(['S -> A A', 'A -> a', 'A -> b'])
 ]
 
 algorithms = [
@@ -33,6 +35,22 @@ algorithms = [
         'edges': ['0 a 1', '1 b 2']
         , 'cnf': grammars[3]
         , 'expected': {(0, 2)}
+    }
+    , {
+        'edges': ['0 a 0', '0 b 0']
+        , 'cnf': grammars[1]
+        , 'expected': {(0, 0)}
+    }
+    , {
+        'edges': ['0 b 1', '1 b 1', '1 a 2', '2 a 3', '2 b 3', '3 b 4', '4 b 3']
+        , 'cnf': grammars[4]
+        , 'expected': {(0, 1), (2, 4), (1, 2), (0, 4), (3, 4), (4, 3), (0, 3), (1, 4), (2, 3), (1, 3)} \
+                      | {(i, i) for i in range(5)}
+    }
+    , {
+        'edges': ['0 a 1', '1 b 2', '2 a 3']
+        , 'cnf': grammars[5]
+        , 'expected': {(0, 2), (1, 3)}
     }
 ])
 def manual_suite(request):
