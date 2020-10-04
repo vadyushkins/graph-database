@@ -1,8 +1,7 @@
 import pytest
+from pyformlang.cfg import *
 
 from src.MyCNF import MyCNF
-
-from pyformlang.cfg import *
 
 grammars = [
     'S -> a S b S\nS -> '
@@ -17,7 +16,7 @@ grammars = [
         'cnf': MyCNF.from_text(grammars[0])
         , 'accepted': [Terminal(x) for x in 'aabbab']
     }
-    ,{
+    , {
         'cnf': MyCNF.from_text(grammars[1])
         , 'accepted': [Terminal(x) for x in 'aabb']
     }
@@ -31,7 +30,7 @@ def accepted_manual_suite(request):
         'cnf': MyCNF.from_text(grammars[0])
         , 'not accepted': [Terminal(x) for x in 'aabcbab']
     }
-    ,{
+    , {
         'cnf': MyCNF.from_text(grammars[1])
         , 'not accepted': [Terminal(x) for x in 'aacbb']
     }
