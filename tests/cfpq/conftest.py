@@ -2,7 +2,7 @@ from itertools import product
 
 import pytest
 
-from src.CFPQ import Hellings, Azimov
+from src.CFPQ import Hellings, Azimov, Tensor
 
 grammars = [
     'S -> a S b S\nS -> '
@@ -12,8 +12,9 @@ grammars = [
 ]
 
 algorithms = [
-    Hellings.cfpq,
-    Azimov.cfpq
+    Hellings.cfpq
+    , Azimov.cfpq
+    , Tensor.cfpq
 ]
 
 

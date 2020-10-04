@@ -67,7 +67,15 @@ class LabeledGraph:
     def __and__(self, other):
         if not isinstance(other, LabeledGraph):
             raise NotImplementedError
-        return self.get_intersection(LabeledGraph)
+        return self.get_intersection(other)
+
+    def dup(self):
+        res = LabeledGraph(self.size)
+        res.start_states = self.start_states.copy()
+        res.final_states = self.final_states.copy()
+        for label in self.labels:
+            res[label] = self[label].dup()
+        return res
 
     def print(self, prefix=None):
         print()
