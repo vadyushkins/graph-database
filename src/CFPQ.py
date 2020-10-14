@@ -11,7 +11,7 @@ from src.MyCNF import MyCNF
 class CFPQ(ABC):
     @classmethod
     @abstractmethod
-    def cfpq(cls, g: LabeledGraph, gr: MyCNF) -> AbstractSet:
+    def cfpq(cls, g: LabeledGraph, gr: CFG) -> AbstractSet:
         pass
 
 

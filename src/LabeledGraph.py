@@ -1,7 +1,8 @@
 from itertools import product
 
 from pyformlang import *
-from pygraphblas import *
+
+from src.Utils import *
 
 
 class LabeledGraph:
@@ -43,13 +44,7 @@ class LabeledGraph:
         for label in self.labels:
             res += self[label]
 
-        while True:
-            prev = res.nvals
-            res += res @ res
-            if prev == res.nvals:
-                break
-
-        return res
+        return transitive_closure(res)
 
     def get_intersection(self, other):
         kron = LabeledGraph(self.size * other.size)
