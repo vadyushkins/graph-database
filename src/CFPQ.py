@@ -2,22 +2,29 @@ from abc import ABC, abstractmethod
 from typing import AbstractSet
 
 from pyformlang.cfg import *
-from pygraphblas import *
 
 from src.LabeledGraph import LabeledGraph
 from src.MyCNF import MyCNF
+from src.Utils import *
 
 
 class CFPQ(ABC):
     @classmethod
     @abstractmethod
-    def cfpq(cls, g: LabeledGraph, gr: MyCNF) -> AbstractSet:
+    def cfpq(cls, g: LabeledGraph, cfg: CFG) -> AbstractSet:
         pass
 
 
 class Hellings(CFPQ):
     @classmethod
-    def cfpq(cls, g: LabeledGraph, gr: MyCNF) -> AbstractSet:
+    def cfpq(cls, g: LabeledGraph, cfg: CFG) -> AbstractSet:
+        gr = MyCNF(
+            cfg.variables,
+            cfg.terminals,
+            cfg.start_symbol,
+            cfg.productions
+        )
+
         edges_for_variable = dict()
 
         for v in gr.variables:
@@ -55,7 +62,14 @@ class Hellings(CFPQ):
 
 class Azimov(CFPQ):
     @classmethod
-    def cfpq(cls, g: LabeledGraph, gr: MyCNF) -> AbstractSet:
+    def cfpq(cls, g: LabeledGraph, cfg: CFG) -> AbstractSet:
+        gr = MyCNF(
+            cfg.variables,
+            cfg.terminals,
+            cfg.start_symbol,
+            cfg.productions
+        )
+
         m = LabeledGraph(g.size)
         for p in gr.unit_productions:
             m[p.head] += g[p.body[0].value]
@@ -78,24 +92,26 @@ class Azimov(CFPQ):
 
 class Tensor(CFPQ):
     @classmethod
-    def cfpq(cls, g: LabeledGraph, gr: MyCNF) -> AbstractSet:
-        rsm = LabeledGraph(2 * len(gr.unit_productions) + 3 * len(gr.pair_productions))
+    def cfpq(cls, g: LabeledGraph, cfg: CFG) -> AbstractSet:
+        cnt = 0
+        for p in cfg.productions:
+            cnt += len(p.body) + 1
+
+        rsm = LabeledGraph(cnt)
 
         cur = 0
         production_for_reachability = dict()
-        for p in gr.unit_productions:
+        for p in cfg.productions:
             rsm.start_states.add(cur)
-            rsm.final_states.add(cur + 1)
-            production_for_reachability[(cur, cur + 1)] = p
-            rsm[p.body[0].value][cur, cur + 1] = True
-            cur += 2
-        for p in gr.pair_productions:
-            rsm.start_states.add(cur)
-            rsm.final_states.add(cur + 2)
-            production_for_reachability[(cur, cur + 2)] = p
-            rsm[p.body[0]][cur, cur + 1] = True
-            rsm[p.body[1]][cur + 1, cur + 2] = True
-            cur += 3
+            production_for_reachability[(cur, cur + len(p.body))] = p
+            for b in p.body:
+                if isinstance(b, Terminal):
+                    rsm[b.value][cur, cur + 1] = True
+                else:
+                    rsm[b][cur, cur + 1] = True
+                cur += 1
+            rsm.final_states.add(cur)
+            cur += 1
 
         m = g.dup()
 
@@ -110,13 +126,17 @@ class Tensor(CFPQ):
                     if (j_m in m.final_states) and (j_rsm in rsm.final_states):
                         m[production_for_reachability[(i_rsm, j_rsm)].head][i_m, j_m] = True
 
-            tc = m.get_intersection(rsm).get_transitive_closure()
+            tmp = m.get_intersection(rsm)
+            for label in tmp.labels:
+                tc += tmp[label]
+            tc = transitive_closure(tc)
+
             if prev == tc.nvals:
                 break
 
-        ans = set(zip(*m[gr.start_symbol].to_lists()[:2]))
+        ans = set(zip(*m[cfg.start_symbol].to_lists()[:2]))
 
-        if gr.generate_epsilon():
+        if cfg.generate_epsilon():
             ans |= {(i, i) for i in range(g.size)}
 
         return ans
