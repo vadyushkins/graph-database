@@ -1,6 +1,6 @@
 if [ ! -f benchmarks/benchmark_cfpq/myDataForCFPQ.tar.xz ]; then
   cd benchmarks/benchmark_cfpq/
-  gdown https://drive.google.com/uc?id=18Jd08Zx70jsiUotPJBxpCPumDe1cBQ_d
+  gdown https://drive.google.com/uc?id=1UDw3OTJG25GM8z_R84D8WiiTkuLxCfLM
   cd ../../
 fi
 
