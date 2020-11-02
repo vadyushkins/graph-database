@@ -4,7 +4,7 @@ if [ ! -f benchmarks/benchmark_cfpq/myDataForCFPQ.tar.xz ]; then
   cd ../../
 fi
 
-declare -a graphs=("MemoryAliases" "FullGraph" "WorstCase" "SparseGraph")
+declare -a graphs=("MemoryAliases" "FullGraph" "WorstCase")
 
 for graph in "${graphs[@]}"; do
   echo "Started benchmark $graph"
