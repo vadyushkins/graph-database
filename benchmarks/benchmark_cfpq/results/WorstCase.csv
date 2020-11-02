@@ -1,0 +1,25 @@
+"Algorithm","Graph","Graph filename","Grammar","Time (in microseconds)","Control sum"
+"Hellings","WorstCase","worstcase_32","g1",55739,272
+"Hellings","WorstCase","worstcase_128","g1",29510916,4160
+"Hellings","WorstCase","worstcase_64","g1",1149756,1056
+"Hellings","WorstCase","worstcase_16","g1",5316,72
+"Hellings","WorstCase","worstcase_4","g1",1330,6
+"Hellings","WorstCase","worstcase_8","g1",1636,20
+"Azimov","WorstCase","worstcase_32","g1",4176,272
+"Azimov","WorstCase","worstcase_128","g1",16683,4160
+"Azimov","WorstCase","worstcase_64","g1",7394,1056
+"Azimov","WorstCase","worstcase_16","g1",2694,72
+"Azimov","WorstCase","worstcase_4","g1",1633,6
+"Azimov","WorstCase","worstcase_8","g1",2008,20
+"TensorWithCNF","WorstCase","worstcase_32","g1",68803,272
+"TensorWithCNF","WorstCase","worstcase_128","g1",1531030,4160
+"TensorWithCNF","WorstCase","worstcase_64","g1",287965,1056
+"TensorWithCNF","WorstCase","worstcase_16","g1",22368,72
+"TensorWithCNF","WorstCase","worstcase_4","g1",4916,6
+"TensorWithCNF","WorstCase","worstcase_8","g1",9274,20
+"TensorWithRSM","WorstCase","worstcase_32","g1",16355,272
+"TensorWithRSM","WorstCase","worstcase_128","g1",270422,4160
+"TensorWithRSM","WorstCase","worstcase_64","g1",56440,1056
+"TensorWithRSM","WorstCase","worstcase_16","g1",6878,72
+"TensorWithRSM","WorstCase","worstcase_4","g1",2673,6
+"TensorWithRSM","WorstCase","worstcase_8","g1",3768,20
