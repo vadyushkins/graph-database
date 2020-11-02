@@ -22,11 +22,12 @@ if len(os.listdir(data_for_cfpq_dir)) == 0:
 
 suites = [
     {
-        'id': f'algo={algo.__name__},graph={graph.split("/")[-3]},grammar={Path(grammar).stem},'
+        'id': f'algo={algo.__name__},graph={graph.split("/")[-3]},graph_file={Path(graph).stem},grammar={Path(grammar).stem}'
         , 'algo': algo
         , 'algo_name': algo.__name__
         , 'graph': graph
         , 'graph_name': graph.split("/")[-3]
+        , 'graph_filename': Path(graph).stem
         , 'grammar': grammar
         , 'grammar_name': Path(grammar).stem
     }
@@ -43,12 +44,13 @@ suites = [
 params = [
     pytest.param(
         {'algo': x['algo'], 'name': x['algo_name']}
-        , {'graph': x['graph'], 'name': x['graph_name']}
+        , {'graph': x['graph'], 'name': x['graph_name'], 'filename': x['graph_filename']}
         , {'grammar': x['grammar'], 'name': x['grammar_name']}
         , marks=[
             getattr(pytest.mark, x['algo_name'])
             , getattr(pytest.mark, x['graph_name'])
             , getattr(pytest.mark, x['grammar_name'])
+            , getattr(pytest.mark, x['graph_filename'])
         ]
         , id=x['id']
     )

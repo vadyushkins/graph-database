@@ -1,7 +1,6 @@
 import csv
 import os
 import time
-from pathlib import Path
 
 import pytest
 from conftest import params
@@ -11,7 +10,7 @@ from conftest import params
 def test_benchmark_rpq(algo, graph, grammar):
     algo_name = algo['name']
     g_name = graph['name']
-    g_filename = Path(graph['graph']).stem
+    g_filename = graph['filename']
     r_name = grammar['name']
 
     result_file = f'{g_name}.csv'
