@@ -115,18 +115,15 @@ Symbol -> (a|(b|(c|(d|(e|(f|(g|(h|(i|(j|(k|(l|(m|(n|(o|(p|(q|(r|(s|(t|(u|(v|(w|(
 ## Examples
 
 ```
-connect to database resources/database_1 ;
-select pairs from g1 ;
-select count from g2 where (((a|b)|(c*))*) ;
+connect to database resources/database_1;
+select pairs from g1;
+select count from g2 where (((a|b)|(c*))*);
 ```
 
 ```
-connect to database resources_database_42 ;
-select pairs from intersection of g1 and g2 where ((a*)|(b*)) ;
+connect to database resources_database_42;
+select pairs from intersection of g1 and g2 where ((a*)|(b*));
 ```
-
-```
-python3 checker.py --script example_script.txt
 
 # Benchmark RPQ
 
