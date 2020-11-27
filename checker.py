@@ -5,6 +5,14 @@ from pyformlang.cfg import *
 from src.CYK import cyk
 from src.RecursiveStateMachine import RecursiveStateMachine
 
+
+def check(input_script):
+    return cyk(
+        [Terminal(x) for x in input_script.replace(' ', '')],
+        RecursiveStateMachine.from_txt('Syntax.txt').to_mycnf()
+    )
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='script validator')
     parser.add_argument(
@@ -30,7 +38,4 @@ if __name__ == '__main__':
             if prev == len(script):
                 break
 
-    script = [Terminal(x) for x in script.replace(' ', '')]
-    check = cyk(script, RecursiveStateMachine.from_txt('Syntax.txt').to_mycnf())
-
-    print(f'SCRIPT IS {"VALID" if check else "NOT VALID"}')
+    print(f'SCRIPT IS {"VALID" if check(script) else "NOT VALID"}')
