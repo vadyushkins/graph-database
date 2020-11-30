@@ -133,9 +133,9 @@ class RecursiveStateMachine:
         productions = []
         with open(path, 'r') as f:
             for line in f:
-                production = line.split()
+                production = line.replace(' -> ', ' ').split()
                 productions.append(production[0] + ' -> ' + ' '.join(production[1:]))
 
         text = '\n'.join(productions)
 
-        return RecursiveStateMachine.from_text(text)
+        return RecursiveStateMachine.from_text(text, start_symbol=productions[0].split(' -> ')[0])
