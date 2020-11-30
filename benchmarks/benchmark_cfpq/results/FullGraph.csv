@@ -1,0 +1,25 @@
+"Algorithm","Graph","Graph filename","Grammar","Time (in microseconds)","Control sum"
+"Hellings","FullGraph","fullgraph_50","g2",62609716,2500
+"Hellings","FullGraph","fullgraph_50","g1",327617,2500
+"Hellings","FullGraph","fullgraph_10","g2",25141,100
+"Hellings","FullGraph","fullgraph_10","g1",1480,100
+"Hellings","FullGraph","fullgraph_100","g2",2003274745,10000
+"Hellings","FullGraph","fullgraph_100","g1",5179025,10000
+"Azimov","FullGraph","fullgraph_50","g2",20992,2500
+"Azimov","FullGraph","fullgraph_50","g1",3455,2500
+"Azimov","FullGraph","fullgraph_10","g2",2938,100
+"Azimov","FullGraph","fullgraph_10","g1",1070,100
+"Azimov","FullGraph","fullgraph_100","g2",75501,10000
+"Azimov","FullGraph","fullgraph_100","g1",9366,10000
+"TensorWithCNF","FullGraph","fullgraph_50","g2",1307179,2500
+"TensorWithCNF","FullGraph","fullgraph_50","g1",225726,2500
+"TensorWithCNF","FullGraph","fullgraph_10","g2",16403,100
+"TensorWithCNF","FullGraph","fullgraph_10","g1",5416,100
+"TensorWithCNF","FullGraph","fullgraph_100","g2",10436417,10000
+"TensorWithCNF","FullGraph","fullgraph_100","g1",1602988,10000
+"TensorWithRSM","FullGraph","fullgraph_50","g2",27645,2500
+"TensorWithRSM","FullGraph","fullgraph_50","g1",8552,2500
+"TensorWithRSM","FullGraph","fullgraph_10","g2",3023,100
+"TensorWithRSM","FullGraph","fullgraph_10","g1",1391,100
+"TensorWithRSM","FullGraph","fullgraph_100","g2",98150,10000
+"TensorWithRSM","FullGraph","fullgraph_100","g1",29486,10000
